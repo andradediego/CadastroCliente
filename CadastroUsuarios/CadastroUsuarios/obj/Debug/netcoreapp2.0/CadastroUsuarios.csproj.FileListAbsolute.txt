@@ -1,0 +1,11 @@
+D:\TesteAthos\CadastroUsuarios\CadastroUsuarios\bin\Debug\netcoreapp2.0\CadastroUsuarios.deps.json
+D:\TesteAthos\CadastroUsuarios\CadastroUsuarios\bin\Debug\netcoreapp2.0\CadastroUsuarios.runtimeconfig.json
+D:\TesteAthos\CadastroUsuarios\CadastroUsuarios\bin\Debug\netcoreapp2.0\CadastroUsuarios.runtimeconfig.dev.json
+D:\TesteAthos\CadastroUsuarios\CadastroUsuarios\bin\Debug\netcoreapp2.0\CadastroUsuarios.dll
+D:\TesteAthos\CadastroUsuarios\CadastroUsuarios\bin\Debug\netcoreapp2.0\CadastroUsuarios.pdb
+D:\TesteAthos\CadastroUsuarios\CadastroUsuarios\obj\Debug\netcoreapp2.0\CadastroUsuarios.csproj.CoreCompileInputs.cache
+D:\TesteAthos\CadastroUsuarios\CadastroUsuarios\obj\Debug\netcoreapp2.0\CadastroUsuarios.AssemblyInfoInputs.cache
+D:\TesteAthos\CadastroUsuarios\CadastroUsuarios\obj\Debug\netcoreapp2.0\CadastroUsuarios.AssemblyInfo.cs
+D:\TesteAthos\CadastroUsuarios\CadastroUsuarios\obj\Debug\netcoreapp2.0\CadastroUsuarios.dll
+D:\TesteAthos\CadastroUsuarios\CadastroUsuarios\obj\Debug\netcoreapp2.0\CadastroUsuarios.pdb
+D:\TesteAthos\CadastroUsuarios\CadastroUsuarios\obj\Debug\netcoreapp2.0\CadastroUsuarios.csprojAssemblyReference.cache

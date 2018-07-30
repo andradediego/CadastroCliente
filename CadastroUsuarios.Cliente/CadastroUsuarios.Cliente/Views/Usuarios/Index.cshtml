@@ -1,0 +1,118 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<style>
+    .mensagem-padding {
+        padding: 15px;
+    }
+</style>
+
+<br />
+<div class="row" id="form-usuario">
+    <div class="col-xs-12 col-md-6 col-md-offset-3">
+        <p v-if="erro || sucesso" v-bind:class="{'bg-danger': erro, 'bg-success': sucesso}" class="mensagem-padding"><strong>{{ mensagemUsuario }}</strong></p>
+        <form>
+            <div class="form-group" v-bind:class="{'has-error': $v.nome.$error}">
+                <label for="Nome">Nome:</label>
+                <input type="text" class="form-control" id="Nome" name="Nome" placeholder="Nome"
+                       v-model.lazy="nome" @@input="$v.nome.$touch()" />
+                <span class="help-block" v-if="$v.nome.$error">Nome inválido</span>
+            </div>
+            <div class="form-group" v-bind:class="{'has-error': $v.sobrenome.$error}">
+                <label for="Sobrenome">Sobrenome:</label>
+                <input type="text" class="form-control" id="Sobrenome" name="Sobrenome" placeholder="Sobrenome"
+                       v-model.lazy="sobrenome" @@input="$v.sobrenome.$touch()" />
+                <span class="help-block" v-if="$v.sobrenome.$error">Sobrenome inválido</span>
+            </div>
+            <div class="form-group" v-bind:class="{'has-error': $v.cpf.$error}">
+                <label for="CPF">CPF:</label>
+                <input type="text" v-mask="'###.###.###-##'" class="form-control"
+                       id="CPF" name="CPF" placeholder="CPF" v-model.lazy="cpf" @@input="$v.cpf.$touch()" />
+                <span class="help-block" v-if="$v.cpf.$error">CPF inválido</span>
+            </div>
+            <div class="form-group" v-bind:class="{'has-error': $v.telefone.$error}">
+                <label for="Telefone">Telefone:</label>
+                <input type="text" v-mask="['(##) ####-####', '(##) #####-####']" class="form-control" id="Telefone"
+                       name="Telefone" placeholder="Telefone" v-model.lazy="telefone" @@input="$v.telefone.$touch()" />
+                <span class="help-block" v-if="$v.telefone.$error">Telefone inválido</span>
+            </div>
+
+            <button v-bind:disabled="$v.$invalid" class="btn btn-primary" v-on:click.prevent="EnviarFormulario($event)">Enviar</button>
+        </form>
+    </div>
+
+</div>
+
+<script>
+    Vue.use(window.vuelidate.default);
+    const { required } = window.validators;
+    new Vue({
+        el: '#form-usuario',
+        data: {
+            erro: false,
+            sucesso: false,
+            mensagemUsuario: '',
+            nome: '',
+            sobrenome: '',
+            cpf: '',
+            telefone: ''
+        },
+        validations: {
+            nome: {
+                required
+            },
+            sobrenome: {
+                required: required
+            },
+            cpf: {
+                required: required,
+                cpfValido: function (valor) {
+                    var validarCPF = new CPF();
+                    return validarCPF.valida(valor);
+                }
+            },
+            telefone: {
+                required: required
+            }
+        },
+        methods: {
+            EnviarFormulario: function (e) {
+                this.erro = false;
+                this.sucesso = false;
+
+                var url = 'http://localhost:50858/api/Usuarios/CadastrarUsuario';
+                var dados = {
+                    id: null,
+                    nome: this.nome,
+                    sobrenome: this.sobrenome,
+                    cpf: this.cpf,
+                    telefone: this.telefone,
+                };
+
+                try {
+                    this.$http.post(url, dados).then(
+                        function (data) {
+                            this.sucesso = true;
+                            this.mensagemUsuario = 'Usuário ' + data.body.nome + ' cadastrado com sucesso';
+                            this.nome = '';
+                            this.sobrenome = '';
+                            this.cpf = '';
+                            this.telefone = '';
+                        },
+                        function (error) {
+                            this.erro = true;
+                            this.mensagemUsuario = error;
+                        }
+                    );
+                } catch (e) {
+                    this.erro = true;
+                    this.mensagemUsuario = e.message;
+                }
+
+            }
+        }
+    });
+
+</script>
+
